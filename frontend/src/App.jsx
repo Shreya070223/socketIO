@@ -7,9 +7,21 @@ const App = () => {
   const socket=io("http://localhost:8000");
 
   useEffect(()=>{
-    socket.io("connect",()=>{
-      console.log("connected",socket.id);
-    })
+   socket.on("connect",()=>{
+    console.log("connected",socket.id);
+   })
+
+   socket.on("welcome",(mess)=>{
+    console.log(mess);
+   })
+
+   socket.on("enter",(mess)=>{
+    console.log(mess);
+   })
+
+   return ()=>{
+    socket.disconnect();
+   }
   },[])
 
   return (
