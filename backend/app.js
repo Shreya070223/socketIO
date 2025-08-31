@@ -31,6 +31,12 @@ io.on("connection",(socket)=>{
     console.log("Id:",socket.id);
     socket.emit("welcome","welcome to the socket");
     socket.broadcast.emit("enter",`the new user ${socket.id} enter`);
+
+    socket.on("message",(data)=>{
+        console.log(data);
+        io.broadcast.emit("receved-message",data);
+    })
+
     socket.on("disconnect",()=>{
         console.log(`user ${socket.id} disconnected`);
     })
